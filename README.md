@@ -12,3 +12,14 @@ livereload:
   volumes:
     - /your/watch/directory:/usr/src/livereload-watch
 ```
+
+It's possible to override the `entrypoint` to tell livereload to watch more additional file extensions
+
+```yml
+livereload:
+  image: harianto/livereload
+  entrypoint: node bin/livereload.js /usr/src/livereload-watch -u true -d --exts 'phtml sass'
+```
+
+> `--exts 'phtml sass'` are additional file extentions. Check [Livereload Command Options](https://github.com/napcs/node-livereload#command-line-options) for more options.
+  
