@@ -4,7 +4,7 @@ Build on Alpine.
 Based on [node-livereload](https://github.com/napcs/node-livereload)
 
 To use, add this to your `docker-compose.yml` file:
-```
+```yml
 livereload:
   image: harianto/livereload
   ports:
