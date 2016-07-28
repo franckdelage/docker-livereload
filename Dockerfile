@@ -13,4 +13,4 @@ WORKDIR /usr/src/app
 RUN git clone https://github.com/jsonfry/node-livereload.git .
 RUN npm install
 
-ENTRYPOINT node bin/livereload.js /usr/src/livereload-watch -u true -d
+ENTRYPOINT node bin/livereload.js /usr/src/livereload-watch -u true -d `[ -f /usr/src/livereload-flags ] && head -1 /usr/src/livereload-flags || echo ""`
