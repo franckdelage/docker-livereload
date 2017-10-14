@@ -1,16 +1,15 @@
-FROM alpine:latest
+FROM alpine:3.6
 
 MAINTAINER Franck Delage <franck@web82.fr>
 
-RUN apk update && apk upgrade
-RUN apk add --update nodejs \
-  make \
-  python \
-  bash \
-  git
-
 WORKDIR /usr/src/app
-RUN git clone https://github.com/napcs/node-livereload.git .
-RUN npm install
 
-ENTRYPOINT node bin/livereload.js /usr/src/livereload-watch -u true -d
+RUN apk add --update  nodejs \
+    && apk add --virtual build-dependencies nodejs-npm git \
+    && git clone https://github.com/napcs/node-livereload.git . \
+    && npm install \
+    && apk del build-dependencies \
+    && rm -rf /tmp/* /var/cache/apk/*
+
+ENTRYPOINT ["node", "bin/livereload.js"]
+CMD ["/usr/src/livereload-watch -u true -d"]
